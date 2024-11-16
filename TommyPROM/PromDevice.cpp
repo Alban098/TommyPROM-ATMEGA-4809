@@ -107,15 +107,19 @@ void PromDevice::setDataBusMode(uint8_t mode)
     // lower 2 bits of port B.
     if (mode == OUTPUT)
     {
-        DDRB |= 0x03;
-        DDRD |= 0xfc;
+        PORTA.DIR |= 0x0F;
+        PORTB.DIR |= 0x07;
+        PORTF.DIR |= 0x20;
     }
         else
     {
-        DDRB &= 0xfc;
-        DDRD &= 0x03;
-        PORTB |= 0x03;  // set pullup resistors
-        PORTD |= 0xfc;
+        PORTA.DIR &= 0xF0;
+        PORTB.DIR &= 0xF8;
+        PORTF.DIR &= 0xDF;
+        
+        PORTA.OUT |= 0x0F; // set pullup resistors
+        PORTB.OUT |= 0x07;
+        PORTF.OUT |= 0x20;
     }
 }
 
@@ -124,7 +128,7 @@ void PromDevice::setDataBusMode(uint8_t mode)
 // before calling this or no useful data will be returned.
 byte PromDevice::readDataBus()
 {
-    return (PINB << 6) | (PIND >> 2);
+    return (PORTA.IN & 0x0F) | ((PORTB.IN & 0x07) << 4) | ((PORTF.IN & 0x20) << 2);
 }
 
 
@@ -132,6 +136,7 @@ byte PromDevice::readDataBus()
 // before calling this or no data will be written.
 void PromDevice::writeDataBus(byte data)
 {
-     PORTB = (PORTB & 0xfc) | (data >> 6);
-     PORTD = (PORTD & 0x03) | (data << 2);
+    PORTA.OUT = (data & 0x0F); 
+    PORTB.OUT = ((data & 0x70) >> 4);
+    PORTF.OUT = ((data & 0x80) >> 2);
 }

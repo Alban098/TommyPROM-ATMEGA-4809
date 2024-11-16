@@ -5,9 +5,9 @@
 
 // IO lines for the EEPROM device control
 // Pins D2..D9 are used for the data bus.
-#define WE              A0
-#define CE              A1
-#define OE              A2
+#define WE              A3
+#define CE              A2
+#define OE              A1
 
 // Set the status of the device control pins
 static void enableChip()       { digitalWrite(CE, LOW); }

@@ -34,8 +34,8 @@ CmdStatus cmdStatus;
 //   64 byte block writes
 //   10ms max write time
 //   Data polling supported
-PromDevice28C  prom(32 * 1024L, 64, 10, true);
-//PromDevice28C  prom(8 * 1024L, 0, 10, true);  // 28C64 with no page writes
+//PromDevice28C  prom(32 * 1024L, 64, 10, true);
+PromDevice28C  prom(8 * 1024L, 0, 10, true);  // 28C64 with no page writes
 //PromDevice28C  prom(2 * 1024L, 0, 10, true);  // 28C16 with no page writes
 
 #elif defined(PROM_IS_27)
