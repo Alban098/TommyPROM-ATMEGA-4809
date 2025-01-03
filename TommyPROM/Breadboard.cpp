@@ -27,7 +27,7 @@ static byte transformData(byte data) {
 }
 
 Breadboard::Breadboard(uint32_t size, word blockSize)
-    : PromDevice(size, blockSize, 0, false)
+    : PromDevice(size, blockSize, 1, false)
 {
 }
 

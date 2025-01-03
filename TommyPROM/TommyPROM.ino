@@ -29,7 +29,7 @@ CmdStatus cmdStatus;
 // Declare a global PROM device depending on the device type that is
 // defined in Configure.h
 #if defined(PROM_IS_BREADBOARD)
-Breadboard  prom(0x10000, 0, 0);
+Breadboard  prom(0x10000, 0);
 
 #elif defined(PROM_IS_28C)
 // Define a device for a 28C256 EEPROM with the following parameters:
